@@ -23,3 +23,4 @@ abstract class Model
         return (empty($res)) ? false : $res[0];
     }
 }
+

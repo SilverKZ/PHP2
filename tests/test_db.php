@@ -27,3 +27,4 @@ assert( true === $db->execute($sql, [':title' => 'Test', ':content' => 'Content'
 
 $sql = 'DELETE FROM articles WHERE title=\'Test\'';
 assert( true === $db->execute($sql) );
+

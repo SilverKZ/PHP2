@@ -19,3 +19,4 @@ class Article extends Model
         return $db->query($sql, [], static::class);
     }
 }
+

@@ -14,3 +14,4 @@ foreach ($result as $file) {
 }
 
 echo 'Tests successfully passed!';
+
