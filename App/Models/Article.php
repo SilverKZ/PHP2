@@ -12,10 +12,10 @@ class Article extends Model
     public $title;
     public $content;
 
-    public static function findLast(int $length = 3)
+    public static function findLast(int $limit = 3)
     {
         $db = new Db();
-        $sql = 'SELECT * FROM ' . static::TABLE . ' ORDER BY id DESC LIMIT ' . $length;
+        $sql = 'SELECT * FROM ' . static::TABLE . ' ORDER BY id DESC LIMIT ' . $limit;
         return $db->query($sql, [], static::class);
     }
 }
