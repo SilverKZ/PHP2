@@ -9,6 +9,7 @@
 </head>
 <body>
     <h1>Новости</h1>
+    <hr>
     <?php foreach ($articles as $article) { ?>
     <h3>
         <a href="/article.php?id=<?php echo $article->id; ?>">

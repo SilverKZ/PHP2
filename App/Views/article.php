@@ -9,6 +9,7 @@
 </head>
 <body>
     <h1>Новость</h1>
+    <hr>
     <?php if (false !== $article) { ?>
     <h3>
         <?php echo $article->title; ?>
