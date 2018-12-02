@@ -2,16 +2,13 @@
 
 require_once __DIR__ . '/../autoload.php';
 
-$files = [];
+// Test DB
+require __DIR__ . '/test_db.php';
 
-$result = scandir(dirname(__FILE__));
+// Test Model
+require __DIR__ . '/test_article.php';
 
-foreach ($result as $file) {
-    if ( !in_array($file, ['.', '..', basename(__FILE__)]) ) {
-        include __DIR__ . '/' . $file;
-        echo $file . ' - tested<br>';
-    }
-}
+// Test Config
+require __DIR__ . '/test_config.php';
 
-echo 'Tests successfully passed!';
-
+echo 'Test completed';
