@@ -12,3 +12,4 @@ require __DIR__ . '/test_article.php';
 require __DIR__ . '/test_config.php';
 
 echo 'Test completed';
+
