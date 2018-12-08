@@ -1,10 +1,13 @@
 <?php
 
 use App\Models\Article;
+use App\View;
 
 require __DIR__ . '/autoload.php';
 
-$articles = Article::findAll();
+$view = new View();
 
-include __DIR__ . '/App/Views/admin.php';
+$view->articles = Article::findAll();
+
+$view->display(__DIR__ . '/App/Views/admin.php');
 

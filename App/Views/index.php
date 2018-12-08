@@ -10,12 +10,20 @@
 <body>
     <h1>Новости</h1>
     <hr>
-    <?php foreach ($articles as $article) { ?>
+    <?php foreach ($articles as $article) : ?>
     <h3>
         <a href="/article.php?id=<?php echo $article->id; ?>">
             <?php echo $article->title; ?>
         </a>
     </h3>
-    <?php } ?>
+    <p>
+        <?php echo $article->content; ?>
+    </p>
+    <!--
+    <p>
+        Автор: <?php echo $article->author->name; ?>
+    </p>
+    -->
+    <?php endforeach ?>
 </body>
 </html>

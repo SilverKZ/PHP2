@@ -1,10 +1,13 @@
 <?php
 
 use App\Models\Article;
+use App\View;
 
 require __DIR__ . '/autoload.php';
 
-$articles = Article::findLast(3);
+$view = new View();
 
-include __DIR__ . '/App/Views/index.php';
+$view->articles = Article::findLast(3);
+
+$view->display(__DIR__ . '/App/Views/index.php');
 

@@ -16,23 +16,9 @@ class Config
     public static function instance()
     {
         if (null == self::$instance) {
-            self::$instance = new Config();
+            self::$instance = new self;
         }
         return self::$instance;
     }
 }
 
-/* Этот вариант больше нравится, т.к. вообще не требует создание объекта Config
-class Config
-{
-    protected static $data = [];
-
-    public static function getData()
-    {
-        if (null == self::$data) {
-            self::$data = include __DIR__ . '/../config.php';
-        }
-        return self::$data;
-    }
-}
-*/

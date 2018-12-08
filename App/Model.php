@@ -62,27 +62,24 @@ abstract class Model
     {
         $fields = get_object_vars($this);
         $sets = [];
+        $data = [];
 
         foreach ($fields as $key => $value) {
+            $data[':' . $key] = $value;
             if ('id' == $key) {
                 continue;
             }
-            $sets[] = $key . '=\'' . $value . '\'';
+            $sets[] = $key . '=:' . $key;
         }
 
         $sql = 'UPDATE ' . static::TABLE . ' SET ' . implode(', ', $sets) . ' WHERE id=:id';
-
         $db = new Db();
-        return $db->execute($sql, [':id' => $this->id]);
+        return $db->execute($sql, $data);
     }
 
     public function save()
     {
-        if (isset($this->id)) {
-            $this->update();
-        } else {
-            $this->insert();
-        }
+        (isset($this->id)) ? $this->update() : $this->insert();
     }
 }
 

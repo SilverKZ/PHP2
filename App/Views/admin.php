@@ -13,15 +13,15 @@
     <!-- Список новостей -->
     <hr>
     <h2>Список новостей</h2>
-    <?php foreach ($articles as $article) { ?>
+    <?php foreach ($articles as $article) : ?>
     <article>
         <h3> <?php echo $article->title; ?> </h3>
         <a href="/update_article.php?id=<?php echo $article->id; ?>">Редактировать</a>
         <a href="/delete_article.php?id=<?php echo $article->id; ?>">Удалить</a>
     </article>
-    <?php } ?>
+    <?php endforeach ?>
 
-    <!-- Добавить новость -->
+    <!-- Добавление новости -->
     <hr>
     <h2>Добавление новости</h2>
     <form action="/add_article.php" method="post">

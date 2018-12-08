@@ -10,13 +10,19 @@
 <body>
     <h1>Новость</h1>
     <hr>
-    <?php if (false !== $article) { ?>
+    <?php if (false !== $article) : ?>
     <h3>
         <?php echo $article->title; ?>
     </h3>
     <p>
         <?php echo $article->content; ?>
     </p>
-    <?php } ?>
+    <!--
+    <p>
+        Автор: <?php echo $article->author->name; ?>
+    </p>
+    -->
+    <?php endif; ?>
 </body>
 </html>
+
