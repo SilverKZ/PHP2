@@ -2,12 +2,22 @@
 
 namespace App;
 
+/**
+ * Class Model
+ * @package App
+ * @property int $id  ID экземпляра текущего класса
+ */
 abstract class Model
 {
     protected const TABLE = '';
 
     public $id;
 
+    /**
+     * Возвращает массив всех записей в виде оъектов
+     *
+     * @return array
+     */
     public static function findAll()
     {
         $db = new Db();
@@ -15,6 +25,12 @@ abstract class Model
         return $db->query($sql, [], static::class);
     }
 
+    /**
+     * Возвращает запись (объект) по ID
+     *
+     * @param int $id
+     * @return object|bool
+     */
     public static function findById(int $id)
     {
         $db = new Db();
@@ -23,6 +39,11 @@ abstract class Model
         return (empty($res)) ? false : $res[0];
     }
 
+    /**
+     * Удаляет запись (объект) по текущему ID
+     *
+     * @return bool
+     */
     public function delete()
     {
         $db = new Db();
@@ -30,6 +51,11 @@ abstract class Model
         return $db->execute($sql, [':id' => $this->id]);
     }
 
+    /**
+     * Сохраняет новую запись (объект)
+     *
+     * @return bool
+     */
     protected function insert()
     {
         $fields = get_object_vars($this);
@@ -58,6 +84,11 @@ abstract class Model
         return false;
     }
 
+    /**
+     * Обновляет запись (объект) после изменений
+     *
+     * @return bool
+     */
     protected function update()
     {
         $fields = get_object_vars($this);
@@ -77,6 +108,9 @@ abstract class Model
         return $db->execute($sql, $data);
     }
 
+    /**
+     * Вызывает соответствующий метод в зависимости от наличия ID
+     */
     public function save()
     {
         (isset($this->id)) ? $this->update() : $this->insert();

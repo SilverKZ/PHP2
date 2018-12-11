@@ -19,11 +19,11 @@
     <p>
         <?php echo $article->content; ?>
     </p>
-    <!--
+    <?php if (!empty($article->author)) : ?>
     <p>
         Автор: <?php echo $article->author->name; ?>
     </p>
-    -->
-    <?php endforeach ?>
+    <?php endif; ?>
+    <?php endforeach; ?>
 </body>
 </html>

@@ -15,3 +15,6 @@ assert( false === Article::findById(10000000) );
 assert( 'array' === gettype( Article::findLast(2) ) );
 assert( 2 === count( Article::findLast(2) ) );
 
+// object $author
+assert( 'object' === gettype( Article::findById(1)->author ) );
+
