@@ -10,7 +10,7 @@ class Config
 
     protected function __construct()
     {
-        $this->data = include __DIR__ . '/../config1.php';
+        $this->data = include __DIR__ . '/../config.php';
     }
 
     public static function instance()
