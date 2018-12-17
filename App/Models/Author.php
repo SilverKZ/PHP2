@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Model;
+use App\Classes\Model;
 
 /**
  * Class Author

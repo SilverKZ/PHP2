@@ -1,11 +1,11 @@
 <?php
 
-namespace App;
+namespace App\Traits;
 
 /**
  * Реализация интерфейса Iterator
  *
- * Trait Iterator
+ * Traits Iterator
  * @package App
  */
 trait Iterator
@@ -57,9 +57,9 @@ trait Iterator
      *
      * @return bool
      */
-    public function valid()
+    public function valid(): bool
     {
-        return !empty(key($this->data));
+        return null !== key($this->data);
     }
 }
 

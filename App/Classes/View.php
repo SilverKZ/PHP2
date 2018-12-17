@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Classes;
 
 /**
  * Class View
@@ -10,8 +10,8 @@ namespace App;
  */
 class View implements \Countable, \Iterator
 {
-    use Accessor;
-    use Iterator;
+    use \App\Traits\Accessor;
+    use \App\Traits\Iterator;
 
     /**
      * Возвращает сформирование представление

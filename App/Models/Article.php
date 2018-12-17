@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use App\Db;
-use App\Model;
+use App\Classes\Db;
+use App\Classes\Model;
 
 /**
  * Class Article
@@ -46,7 +46,7 @@ class Article extends Model
     public function __get($name)
     {
        if ('author' == $name && !empty($this->author_id)) {
-           return $this->author = Author::findById($this->author_id);
+           return Author::findById($this->author_id);
        }
        return null;
     }

@@ -1,12 +1,12 @@
 <?php
 
-namespace App;
+namespace App\Traits;
 
 /**
  * Перегрузка недоступных свойств
  *
- * Trait Accessor
- * @package App
+ * Traits Accessor
+ * @package App\Traits
  */
 trait Accessor
 {

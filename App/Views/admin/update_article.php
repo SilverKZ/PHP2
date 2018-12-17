@@ -13,7 +13,7 @@
     <!-- Редактирование новости -->
     <hr>
     <h2>Редактирование новости</h2>
-    <form action="/update_article.php" method="post">
+    <form action="/admin/news/update" method="post">
         <input type="hidden" name="id" value="<?php echo $article->id; ?>">
         <textarea name="title" cols="60" rows="3"><?php echo $article->title; ?></textarea> <br>
         <textarea name="content" cols="60" rows="20"><?php echo $article->content; ?></textarea> <br>

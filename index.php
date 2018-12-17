@@ -1,13 +1,16 @@
 <?php
 
-use App\Models\Article;
-use App\View;
-
 require __DIR__ . '/autoload.php';
 
-$view = new View();
+$params = explode('/', $_SERVER['REQUEST_URI']);
 
-$view->articles = Article::findLast(3);
+$controllerName = (!empty($params[1])) ? ucfirst($params[1]) : 'Index';
 
-$view->display(__DIR__ . '/App/Views/index.php');
+$controllerClass = '\App\Controllers\\' . $controllerName;
+
+$controller = new $controllerClass;
+
+$actionName = (!empty($params[2])) ? strtolower($params[2]) : 'index';
+
+$controller->action($actionName, $params);
 

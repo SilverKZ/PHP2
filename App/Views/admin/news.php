@@ -16,15 +16,15 @@
     <?php foreach ($articles as $article) : ?>
     <article>
         <h3> <?php echo $article->title; ?> </h3>
-        <a href="/update_article.php?id=<?php echo $article->id; ?>">Редактировать</a>
-        <a href="/delete_article.php?id=<?php echo $article->id; ?>">Удалить</a>
+        <a href="/admin/news/get/<?php echo $article->id; ?>">Редактировать</a>
+        <a href="/admin/news/delete/<?php echo $article->id; ?>">Удалить</a>
     </article>
     <?php endforeach ?>
 
     <!-- Добавление новости -->
     <hr>
     <h2>Добавление новости</h2>
-    <form action="/add_article.php" method="post">
+    <form action="/admin/news/add" method="post">
         <textarea name="title" cols="60" rows="3" placeholder="Заголовок"></textarea> <br>
         <textarea name="content" cols="60" rows="10" placeholder="Содержание новости"></textarea> <br>
         <button name="add">Добавить</button>
