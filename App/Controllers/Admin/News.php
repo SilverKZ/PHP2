@@ -30,23 +30,17 @@ class News extends Controller
 
     protected function update()
     {
-        if (isset($_POST['id'])) {
-            $article = Article::findById($_POST['id']);
-            $article->title = $_POST['title'];
-            $article->content = $_POST['content'];
-            $article->save();
-            $this->redirect('/admin/news');
-        }
+        $article = Article::findById($_POST['id']);
+        $article->fill($_POST);
+        $article->save();
+        $this->redirect('/admin/news');
     }
 
     protected function add()
     {
-        if (isset($_POST['add'])) {
-            $article = new Article();
-            $article->title = $_POST['title'];
-            $article->content = $_POST['content'];
-            $article->save();
-        }
+        $article = new Article();
+        $article->fill($_POST);
+        $article->save();
         $this->redirect('/admin/news');
     }
 

@@ -29,14 +29,14 @@ abstract class Model
      * Возвращает запись (объект) по ID
      *
      * @param int $id
-     * @return object|bool
+     * @return object
      */
     public static function findById(int $id)
     {
         $db = new Db();
         $sql = 'SELECT * FROM ' . static::TABLE . ' WHERE id=:id';
         $res = $db->query($sql, [':id' => $id], static::class);
-        return (empty($res)) ? false : $res[0];
+        return $res[0];
     }
 
     /**
@@ -117,6 +117,29 @@ abstract class Model
             $this->update();
         } else {
             $this->insert();
+        }
+    }
+
+    /**
+     * Заполняет свойства модели данными из массива, валидируя их
+     *
+     * @param array $data
+     */
+    public function fill(array $data): void
+    {
+        $errors = new MultiException();
+
+        foreach ($data as $key => $value) {
+            if (property_exists($this, $key)) {
+                if (empty($data[$key])) {
+                    $errors->add(new \Exception('Не заполнено поле: ' . $key, 42));
+                }
+                $this->$key = $data[$key];
+            }
+        }
+
+        if (!$errors->empty()) {
+            throw $errors;
         }
     }
 }

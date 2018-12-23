@@ -8,9 +8,24 @@ $controllerName = (!empty($params[1])) ? ucfirst($params[1]) : 'Index';
 
 $controllerClass = '\App\Controllers\\' . $controllerName;
 
-$controller = new $controllerClass;
-
 $actionName = (!empty($params[2])) ? strtolower($params[2]) : 'index';
 
-$controller->action($actionName, $params);
+try {
+
+    $controller = new $controllerClass;
+    $controller->action($actionName, $params);
+
+} catch (\App\Classes\DBException $ex) {
+
+    \App\Classes\Logger::save($ex);
+    $controller = new \App\Controllers\Error;
+    $controller->action('dataBase', $ex);
+
+} catch (\App\Classes\BaseException $ex) {
+
+    \App\Classes\Logger::save($ex);
+    $controller = new \App\Controllers\Error;
+    $controller->action('notFound', $ex);
+
+}
 

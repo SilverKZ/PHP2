@@ -18,9 +18,15 @@ class Db
      */
     public function __construct()
     {
+
         $config = Config::instance()->data['db'];
         $dsn = $config['type'] . ':host=' . $config['host'] . ';dbname=' . $config['dbname'];
-        $this->dbh = new \PDO($dsn, $config['user'], $config['pass']);
+
+        try {
+            $this->dbh = new \PDO($dsn, $config['user'], $config['pass']);
+        } catch (\PDOException $ex) {
+            throw new DBException('Нет соединения с БД', $ex->getCode());
+        }
     }
 
     /**
@@ -34,12 +40,21 @@ class Db
     public function query(string $sql, array $params = [], $class = '')
     {
         $sth = $this->dbh->prepare($sql);
-        $sth->execute($params);
+
+        if (false === $sth->execute($params)) {
+            throw new DBException('Неверный запрос к БД', 42);
+        }
 
         if (empty($class)) {
-            return $sth->fetchAll(\PDO::FETCH_ASSOC);
+            $result = $sth->fetchAll(\PDO::FETCH_ASSOC);
+         } else {
+             $result = $sth->fetchAll(\PDO::FETCH_CLASS, $class);
+        }
+
+        if (empty($result)) {
+            throw new BaseException('Ошибка 404 - не найдено', 42);
         } else {
-            return $sth->fetchAll(\PDO::FETCH_CLASS, $class);
+            return $result;
         }
     }
 
@@ -48,12 +63,14 @@ class Db
      *
      * @param string $sql    Запрос sql
      * @param array $params  Значения подставляемых переменных
-     * @return bool
      */
     public function execute(string $sql, array $params = [])
     {
         $sth = $this->dbh->prepare($sql);
-        return $sth->execute($params);
+
+        if (false === $sth->execute($params)) {
+            throw new DBException('Неверный запрос к БД', 42);
+        }
     }
 
     /**

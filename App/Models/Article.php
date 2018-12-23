@@ -46,7 +46,7 @@ class Article extends Model
     public function __get($name)
     {
        if ('author' == $name && !empty($this->author_id)) {
-           return Author::findById($this->author_id);
+           return $this->author = Author::findById($this->author_id);
        }
        return null;
     }

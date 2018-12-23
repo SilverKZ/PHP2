@@ -12,10 +12,20 @@ abstract class Controller
         $this->view = new View();
     }
 
-    public function action(string $action, array $params)
+    public function action(string $action, $params)
     {
         $this->params = $params;
-        ($this->access()) ? $this->$action() : die('Доступ закрыт');
+
+        if ($this->access()) {
+            $this->$action();
+        } else {
+            throw new BaseException('Доступ закрыт');
+        }
+    }
+
+    public function __call($name, $arguments)
+    {
+        throw new BaseException('Ошибка 404 - не найдено', 42);
     }
 
     protected function access(): bool
