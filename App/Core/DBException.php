@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Classes;
+namespace App\Core;
 
 /**
  * Class DbException
- * @package App\Classes
+ * @package App\Core
  *
  * Класс исключений, возникающих при работе с базой данных
  */

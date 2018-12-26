@@ -2,7 +2,7 @@
 
 namespace App\Controllers\Admin;
 
-use App\Classes\Controller;
+use App\Core\Controller;
 
 class Index extends Controller
 {

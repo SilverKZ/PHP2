@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Classes;
+namespace App\Core;
 
 /**
  * Class MultiException
- * @package App\Classes
+ * @package App\Core
  */
 class MultiException extends \Exception
 {

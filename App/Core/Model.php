@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Classes;
+namespace App\Core;
 
 /**
  * Class Model
@@ -37,6 +37,19 @@ abstract class Model
         $sql = 'SELECT * FROM ' . static::TABLE . ' WHERE id=:id';
         $res = $db->query($sql, [':id' => $id], static::class);
         return $res[0];
+    }
+
+    /**
+     * Возвращает последние записи
+     *
+     * @param int $limit Количество последних записей
+     * @return array Список записей (объекты)
+     */
+    public static function findLast(int $limit = 3)
+    {
+        $db = new Db();
+        $sql = 'SELECT * FROM ' . static::TABLE . ' ORDER BY id DESC LIMIT ' . $limit;
+        return $db->query($sql, [], static::class);
     }
 
     /**

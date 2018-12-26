@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Classes;
+namespace App\Core;
 
 /**
  * Class BaseException
- * @package App\Classes
+ * @package App\Core
  */
 class BaseException extends \Exception
 {

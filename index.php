@@ -12,18 +12,24 @@ $actionName = (!empty($params[2])) ? strtolower($params[2]) : 'index';
 
 try {
 
+    if (!is_readable(__DIR__ . '\\' . str_replace('\\', '/', $controllerClass) . '.php')) {
+        throw new \App\Core\BaseException('Ошибка 404 - не найдено', 42);
+    }
+
     $controller = new $controllerClass;
     $controller->action($actionName, $params);
 
-} catch (\App\Classes\DBException $ex) {
+} catch (\App\Core\DBException $ex) {
 
-    \App\Classes\Logger::save($ex);
+    (new \App\Core\Logger($ex))->error('Logger');
+
     $controller = new \App\Controllers\Error;
     $controller->action('dataBase', $ex);
 
-} catch (\App\Classes\BaseException $ex) {
+} catch (\App\Core\BaseException $ex) {
 
-    \App\Classes\Logger::save($ex);
+    (new \App\Core\Logger($ex))->error('Logger');
+
     $controller = new \App\Controllers\Error;
     $controller->action('notFound', $ex);
 

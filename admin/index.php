@@ -15,20 +15,20 @@ try {
     $controller = new $controllerClass;
     $controller->action($actionName, $params);
 
-} catch (\App\Classes\MultiException $ex) {
+} catch (\App\Core\MultiException $ex) {
 
     $controller = new \App\Controllers\Error;
     $controller->action('validate', $ex);
 
-} catch (\App\Classes\DBException $ex) {
+} catch (\App\Core\DBException $ex) {
 
-    \App\Classes\Logger::save($ex);
+    (new \App\Core\Logger($ex))->error('Logger');
     $controller = new \App\Controllers\Error;
     $controller->action('dataBase', $ex);
 
-} catch (\App\Classes\BaseException $ex) {
+} catch (\App\Core\BaseException $ex) {
 
-    \App\Classes\Logger::save($ex);
+    (new \App\Core\Logger($ex))->error('Logger');
     $controller = new \App\Controllers\Error;
     $controller->action('notFound', $ex);
 
